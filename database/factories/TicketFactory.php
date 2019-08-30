@@ -1,7 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use Opendesk\User;
+use Opendesk\Ticket;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 use Carbon\Carbon;
@@ -17,14 +17,15 @@ use Carbon\Carbon;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Ticket::class, function (Faker $faker) {
     return [
-        'name' => $faker->name(),
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-        'remember_token' => Str::random(10),
-        'ext' => $faker->sentence(),
-        'number' => $faker->sentence()
+        'user_id' => random_int(1, 10),
+        'clientname' => $faker->sentence(),
+        'issue' => $faker->sentence(),
+        'description' => $faker->realText(),
+        'created_by' => random_int(-2147483648, 2147483647),
+        'updated_by' => random_int(-2147483648, 2147483647),
+        'closed_at' => $faker->dateTimeBetween('-30 years', 'now'),
+        'service_id' => random_int(1, 10)
     ];
 });
